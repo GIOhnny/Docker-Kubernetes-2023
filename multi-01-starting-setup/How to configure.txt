@@ -1,0 +1,13 @@
+1) Creare network 
+docker network create goals-net
+
+2) MongoDB
+2.1) execute docker run --name mongodb --rm -d --network goals-net mongo
+
+3) Backend
+3.1) Change 'mongodb://host.docker.internal:27017/course-goals' to 'mongodb://mongodb:27017/course-goals' inside app.js
+3.2) cd backend; docker build -t goals-node .
+3.3) execute docker run --name goals-backend --rm -d -p 80:80 --network goals-net goals-node
+
+4) frontend React
+4.3) docker run --name goals-frontend --rm -d -p 3000:3000 -it goals-react
