@@ -1,0 +1,25 @@
+{
+    "sqltools.useNodeRuntime": true,
+    "sqltools.connections": [
+        {
+            "previewLimit": 50,
+            "driver": "SQLite",
+            "name": "transrar",
+            "database": "Z:\\shell\\transrar\\db\\transrar.db"
+        },
+        {
+            "mysqlOptions": {
+                "authProtocol": "default",
+                "enableSsl": "Disabled"
+            },
+            "previewLimit": 50,
+            "server": "192.168.1.115",
+            "port": 3306,
+            "driver": "MariaDB",
+            "name": "NAS_MariaDB",
+            "database": "demo",
+            "username": "root",
+            "password": "vGkyLd24Rgm@nYJ"
+        }
+    ]
+}
