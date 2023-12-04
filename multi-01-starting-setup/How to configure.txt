@@ -11,3 +11,11 @@ docker network create goals-net
 
 4) frontend React
 4.3) docker run --name goals-frontend --rm -d -p 3000:3000 -it goals-react
+--------------------
+Data persistence on MogoDB
+docker run --name mongodb -v data:/data/db --rm -d --network goals-net mongo
+
+Data security on MogoDB 
+1) docker volume rm data (the db was created without admin/password and then the connection will fail)
+2) docker run --name mongodb -v data:/data/db --rm -d --network goals-net -e MONGO_INITDB_ROOT_USERNAME=GIOhnny -e MONGO_INITDB_ROOT_PASSWORD=secret mongo
+3) docker run --name goals-backend --rm -p 80:80 -d --network goals-net goals-node
