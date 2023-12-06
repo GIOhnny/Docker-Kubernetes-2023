@@ -19,3 +19,31 @@ Data security on MogoDB
 1) docker volume rm data (the db was created without admin/password and then the connection will fail)
 2) docker run --name mongodb -v data:/data/db --rm -d --network goals-net -e MONGO_INITDB_ROOT_USERNAME=GIOhnny -e MONGO_INITDB_ROOT_PASSWORD=secret mongo
 3) docker run --name goals-backend --rm -p 80:80 -d --network goals-net goals-node
+
+87. Volumes, Bind Mounts for NodeJs Backend
+1) Prepare volume for logs
+2) Prepare /app content
+3) Prepare node_modules
+
+docker run --name goals-backend -v "D:/Projects/Docker/multi-01-starting-setup/backend":/app -v logs:/app/logs -v /app/node_modules --rm -d -p 80:80 --network goals-net goals-node
+Because of the CMD command in Dockerfile the app will not refresh when updated
+#command to be executed on container startup
+CMD ["node", "app.js"]
+
+Solution:
+a) Add in the package.json the nodemon module
+  "devDependencies": {
+    "nodemon": "^2.0.4"
+  }
+b) also add the nodemon in the scripts section
+ "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon --legacy-watch app.js"
+  }
+c) replace in Docker file
+CMD ["node", "app.js"] with
+CMD ["npm", "start"]
+
+d) Add in Docker file
+#install nodemon global
+RUN npm install --global nodemon

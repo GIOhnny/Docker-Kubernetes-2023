@@ -7,6 +7,8 @@ WORKDIR /app
 #copy package.json to /app dir
 COPY package.json .
 
+#install nodemon global
+RUN npm install --global nodemon
 #execute npm install
 RUN npm install
 
@@ -17,9 +19,12 @@ COPY . .
 EXPOSE 80
 
 #command to be executed on container startup
-CMD ["node", "app.js"]
+CMD ["npm", "start"]
 
+#build with
+#docker build -t goals-node .
 #execute with
 #docker run --name goals-backend --rm -d -p 80:80 goals-node
+#docker run --name goals-backend -v "D:/Projects/Docker/multi-01-starting-setup/backend":/app -v logs:/app/logs -v /app/node_modules --rm -p 80:80 --network goals-net goals-node
 #execute mongodb container before
 # docker run --name mongodb --rm -d -p 27017:27017 mongo
