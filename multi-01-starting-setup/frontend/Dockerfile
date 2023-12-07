@@ -16,6 +16,7 @@ COPY . .
 #expose port
 EXPOSE 3000
 
+ENV WATCHPACK_POLLING=true
 #command to be executed on container startup
 CMD ["npm", "start"]
 
@@ -23,3 +24,5 @@ CMD ["npm", "start"]
 # docker build -t goals-react .
 #execute with
 #docker run --name goals-frontend --rm -d -p 3000:3000 -it goals-react
+# Sec 5 - 88
+# docker run -v "D:/Projects/Docker/multi-01-starting-setup/frontend/src":/app/src --name goals-frontend --rm -d -p 3000:3000 -it goals-react

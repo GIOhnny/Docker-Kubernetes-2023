@@ -60,3 +60,8 @@ mongoose.connect(
 
 Docker ignore
 a) create a file .dockerignore
+
+Live source Code Upodates for React
+a) Add ENV WATCHPACK_POLLING=true to enable autorefresh on windows
+b) Add volume for the sources
+#docker run -v "D:/Projects/Docker/multi-01-starting-setup/frontend/src":/app/src --name goals-frontend --rm -d -p 3000:3000 -it goals-react

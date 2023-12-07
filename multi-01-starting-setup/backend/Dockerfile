@@ -33,4 +33,5 @@ CMD ["npm", "start"]
 #execute mongodb container before
 # docker run --name mongodb --rm -d -p 27017:27017 mongo
 #After setting up the ENV variables
+#docker run --name mongodb -v data:/data/db --rm -d --network goals-net -e MONGO_INITDB_ROOT_USERNAME=GIOhnny -e MONGO_INITDB_ROOT_PASSWORD=secret mongo
 #docker run --name goals-backend -v "D:/Projects/Docker/multi-01-starting-setup/backend":/app -v logs:/app/logs -v /app/node_modules -e MONGODB_USERNAME=GIOhnny -d --rm -p 80:80 --network goals-net goals-node
