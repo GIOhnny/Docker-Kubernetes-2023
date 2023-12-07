@@ -18,6 +18,10 @@ COPY . .
 #expose port
 EXPOSE 80
 
+#set Env variables
+ENV MONGODB_USERNAME=root
+ENV MONGODB_PASSWORD=secret
+
 #command to be executed on container startup
 CMD ["npm", "start"]
 
@@ -25,6 +29,8 @@ CMD ["npm", "start"]
 #docker build -t goals-node .
 #execute with
 #docker run --name goals-backend --rm -d -p 80:80 goals-node
-#docker run --name goals-backend -v "D:/Projects/Docker/multi-01-starting-setup/backend":/app -v logs:/app/logs -v /app/node_modules --rm -p 80:80 --network goals-net goals-node
+#docker run --name goals-backend -v "D:/Projects/Docker/multi-01-starting-setup/backend":/app -v logs:/app/logs -v /app/node_modules -d --rm -p 80:80 --network goals-net goals-node
 #execute mongodb container before
 # docker run --name mongodb --rm -d -p 27017:27017 mongo
+#After setting up the ENV variables
+#docker run --name goals-backend -v "D:/Projects/Docker/multi-01-starting-setup/backend":/app -v logs:/app/logs -v /app/node_modules -e MONGODB_USERNAME=GIOhnny -d --rm -p 80:80 --network goals-net goals-node

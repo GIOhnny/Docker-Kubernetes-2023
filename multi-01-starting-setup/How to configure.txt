@@ -47,3 +47,16 @@ CMD ["npm", "start"]
 d) Add in Docker file
 #install nodemon global
 RUN npm install --global nodemon
+
+Adding Environment Variables
+a) Dockerfile for backend
+#set Env variables
+ENV MONGODB_USERNAME GIOhnny
+ENV MONGODB_PASSWORD secret
+
+b) mongoose config in app.js
+mongoose.connect(
+  `mongodb://${process.env.MONGODB_USERNAME}:${process.env.MONGODB_PASSWORD}@mongodb:27017/course-goals?authSource=admin`,
+
+Docker ignore
+a) create a file .dockerignore
