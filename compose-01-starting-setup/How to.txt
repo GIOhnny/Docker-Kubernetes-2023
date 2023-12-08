@@ -1,0 +1,8 @@
+#run in detached mode
+docker-compose up  => composes in attached mode
+docker-compose up -d => composes in detached mode
+docker-compose down => stops compose
+docker-compose down -v => stops compose and deletes volumes
+
+docker-compose up --build => forces rebuild
+docker-compose build => just builds not bringing the containers up

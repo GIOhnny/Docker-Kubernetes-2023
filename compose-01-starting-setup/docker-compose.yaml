@@ -1,0 +1,59 @@
+#https://docs.docker.com/compose/compose-file/
+version: "3.8"
+services:
+  mongodb:
+    image: "mongo"
+    volumes:
+      - data:/data/db
+    #environment:
+      #MONGO_INITDB_ROOT_USERNAME: GIOhnny
+      #MONGO_INITDB_ROOT_PASSWORD: secret
+      #  sau 
+      #- MONGO_INITDB_ROOT_USERNAME=GIOhnny
+      #- MONGO_INITDB_ROOT_PASSWORD=secret
+      # sau relative path to file cu env_file
+    env_file:
+      - ./env/mongo.env
+    #networks nu e nevoie pt ca docker compose creaza o retea pt tot ce este in yaml file
+  backend:
+    # Searches for the Dockerfile in the specified path
+    build: ./backend
+    # for more specific config
+    #build:
+    #  context: ./backend
+    #  dockerfile: Dockerfile
+    #  args:
+    #    some-arg: 1
+    # if a standard image as mongo
+    #image: "goals-node"
+    ports:
+      - "80:80"
+    volumes:
+      - logs:/app/logs
+      # easier with relative path
+      # bind mounts don't need to be added at the end
+      - ./backend:/app
+      # anonymous volumes don't need to be added at the end
+      - /app/node_modules
+    env_file:
+      - ./env/backend.env
+    depends_on:
+      - mongodb      
+  frontend:
+    build: 
+      context: ./frontend
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./frontend/src:/app/src
+    #interactiv mode the stdin_open + tty
+    stdin_open: true
+    tty: true
+    depends_on:
+      - backend
+# named volumes must be specified at the end
+# if the same name is usd in multiple containers then the volume us shared!  
+volumes:
+  data:
+  logs:
