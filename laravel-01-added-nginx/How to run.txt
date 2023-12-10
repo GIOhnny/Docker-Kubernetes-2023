@@ -1,0 +1,15 @@
+#generating the laravel project running only the utilisy service names composer from the docker-compose.yaml
+docker-compose run --rm composer create-project --prefer-dist laravel/laravel .
+
+#execute only some services
+docker-compose up -d server php mysql
+
+docker-compose up -d --build server
+
+connect to server and run
+chmod -R 777 storage
+chmod -R 777 vendor
+
+also execute in cmd the artisan commands if API key error
+docker-compose run --rm artisan key:generate
+docker-compose run --rm artisan config:cache
