@@ -1,0 +1,14 @@
+Deploy to AWS ECS
+1) We need to create a new variable
+MONGODB_URL=mongodb
+
+in the Dockerfile for the backend.
+For dev this value will be mongodb and will be used in the app.js as 
+${process.env.MONGODB_URL}
+In AWS ECS production, the value will be localhost because the backend and mongodb conainers will be in the same task
+
+docker build -t goals-node ./backend
+docker tag goals-node giohnny/goals-node
+create repository in DockerHub named goals-node
+docker tag goals-node giohnny/goals-node
+
